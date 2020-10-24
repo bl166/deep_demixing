@@ -89,7 +89,7 @@ TBD.
 All the candidate models are declared in `./models.py`. They inherit from the `torch.nn.Module` class, and you can find its documentation [here](https://pytorch.org/docs/stable/generated/torch.nn.Module.html) and a detailed tutorial to customize it [here](https://pytorch.org/tutorials/beginner/pytorch_with_examples.html#pytorch-custom-nn-modules). Depending on whether the model is graph-based, you may choose from the 2 types of trainers defined in `./trainer.py`, namely the `CVAE_Pr_Trainer` and the `Benchmark_Trainer`. Here we introduce the usage of `CVAE_Pr_Trainer` in detail; the other one is very much similar or even simpler.
 
 ----
-- CLASS trainer.GCVAE_Trainer(model, check_path, optimizer, resume=True, **kwargs)</span> [[SOURCE]](./trainer.py#L336)
+- CLASS trainer.GCVAE_Trainer(model, check_path, optimizer, resume=True, **kwargs)</span> [[SOURCE]](./trainer.py#L293)
   - A wrapper for PyTorch models.
   - Parameters:
     - **model** (*torch.nn.Module*) – the PyTorch model to train/validate/tune.
@@ -104,13 +104,13 @@ All the candidate models are declared in `./models.py`. They inherit from the `t
         - **max_steps** (*int*, *optional*) - if set, this will be the number of time-steps that we consider when training the model. For example, if we pass in input data `y` of shape (BN, T) and max_steps=T_m ( <T ), then you can think of it as equivalent to slicing `y` into `y[:,:T_m]`.
         - **auto_stop** (*int*, *optional*) - during training, if the validation loss stops dropping for no more than this number of epochs, the training has to hang in there. Once exceeding this number, the trainer will automatically terminate.
   - Methods:
-    - **train** (*epoch: int, criterion: dict, loader: DataLoader*) $\rightarrow$ None
+    - **train** (*epoch: int, criterion: dict, loader: DataLoader*) → None
       - Parameters:
         - **epoch** (*int*) - current epoch number.
         - **criterion** (*dict*) - a dict of loss functions to use. Should be in the format of `{'kld': ..., 'bce': ..., 'rule': ...}`. Among the fixed keys, `'kld'` is the KL-divergence loss between posterior and prior nets; `'bce'` is the binary cross entropy loss of the reconstructed graph signals; `'rule'` is the spreading rule based regularizer that's specific to our definition. (Our rule basically says if your neighbors are not infected in day t-1, then you cannot get infected in day t.)
         - **loader** (*torch_geometric.data.DataLoader/DataListLoader*) - training dataloader.
 
-    - **predict** (*epoch: int, criterion: dict = None, loader:DataLoader = None, save: bool = False*) $\rightarrow$ y_true, y_hat, A_coo
+    - **predict** (*epoch: int, criterion: dict = None, loader:DataLoader = None, save: bool = False*) → y_true, y_hat, A_coo
       - Parameters:
         - **epoch** (*int*) - current epoch number.
         - **criterion** (*dict*, *optional*) - same as in `.train()`.
@@ -121,7 +121,7 @@ All the candidate models are declared in `./models.py`. They inherit from the `t
         - **y_gt** (*numpy.array*) - ground truth graph signals.
         - **A_eidx** (*numpy.array*) - the associated graph adjacency in the form of edge index.
 
-        - **predict** (*epoch: int, criterion: dict = None, loader:DataLoader = None, save: bool = False*) $\rightarrow$ y_true, y_hat, A_coo
+        - **predict** (*epoch: int, criterion: dict = None, loader:DataLoader = None, save: bool = False*) → y_true, y_hat, A_coo
           - Parameters:
             - **epoch** (*int*) - current epoch number.
             - **criterion** (*dict*, *optional*) - same as in `.train()`.
