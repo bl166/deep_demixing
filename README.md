@@ -152,8 +152,3 @@ We analyze and compare results yielded by candidate model both quantitatively an
 
 ## References
 - http://www.sociopatterns.org/datasets/primary-school-temporal-network-data/
-
-## Citation
-```
-TBD.
-```
