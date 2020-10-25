@@ -126,6 +126,8 @@ For more details and extensive usage, please refer to the training scripts `./sc
 #### iii. Analysis of Results
 We analyze and compare results yielded by candidate model both quantitatively and qualitatively. Quantitatively, we adopt the mean square error (MSE) to evaluate the node-level binary (infected / not infected) reconstruction performance. Additionally, we examine the top-k accuracy of sourcing the initial infected point performed by these models. Qualitatively, here we display the reconstructed graphs over time to show that our proposed model indeed does well finding the patient(s) "zero".
 
+<br>
+
 **Table 1**: MSE of predictions on unseen graphs with different graphdensity for two different lengths of the epidemics.
 | Graph density  | Baseline       | Denser        | Sparser        |
 |----------------|:--------------:|:-------------:|:--------------:|
@@ -134,6 +136,17 @@ We analyze and compare results yielded by candidate model both quantitatively an
 | CNN-nodes      | .106  \|  .188 | .270  \| .239 | .177   \| .232 |
 | CNN-time       | .143  \|  .194 | .267  \| .240 | .168   \| .226 |
 | DDmix    |**.101** \| **.177** | **.160** \| **.197** | **.075** \| **.216** |
+
+<br>
+
+**Table 2**: Real network experiment. Accuracy (%) of identifying the source of epidemics (20 steps, 10 classes).
+| Models     | top-1       | top-3       | top-5         |
+|------------|:-----------:|:-----------:|:-------------:|
+| CNN-time   | 11.6        | 30.4        | 53.4          |
+| CNN-nodes  | 12.8        | 36.8        | 60.0          |
+| DDmix      |**25.9**     | **61.2**    | **82.9**      |
+
+<br>
 
 ![graph](./figs/vis.png)
 **Figure 1**. DDmix is able to trace the cluster of initially infected nodes to its accurate source, whereas the non-graph-aware methods cannot. Unlike DDmix's reconstruction where one can clearly observe local and global spreading paths, their node probabilities just universally fade away as going back in time.
