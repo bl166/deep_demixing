@@ -109,28 +109,16 @@ All the candidate models are declared in `./models.py`. They inherit from the `t
         - **epoch** (*int*) - current epoch number.
         - **criterion** (*dict*) - a dict of loss functions to use. Should be in the format of `{'kld': ..., 'bce': ..., 'rule': ...}`. Among the fixed keys, `'kld'` is the KL-divergence loss between posterior and prior nets; `'bce'` is the binary cross entropy loss of the reconstructed graph signals; `'rule'` is the spreading rule based regularizer that's specific to our definition. (Our rule basically says if your neighbors are not infected in day t-1, then you cannot get infected in day t.)
         - **loader** (*torch_geometric.data.DataLoader/DataListLoader*) - training dataloader.
-
-    - **predict** (*epoch: int, criterion: dict = None, loader:DataLoader = None, save: bool = False*) → y_true, y_hat, A_coo
+    - **predict** (*epoch: int, criterion: dict = None, loader:DataLoader = None, save: bool = False*) → y_gt, y_pr, A_eidx
       - Parameters:
         - **epoch** (*int*) - current epoch number.
         - **criterion** (*dict*, *optional*) - same as in `.train()`.
         - **loader** (*torch_geometric.data.DataLoader/DataListLoader*) - validation or test dataloader.
         - **save** (*bool*, *optional*) - if True, save the model if the predicted loss turns out to be the current smallest.
       - Returns:
-        - **y_pr** (*numpy.array*) - predicted probabilities of reconstructed graph signals.
         - **y_gt** (*numpy.array*) - ground truth graph signals.
+        - **y_pr** (*numpy.array*) - predicted probabilities of reconstructed graph signals.
         - **A_eidx** (*numpy.array*) - the associated graph adjacency in the form of edge index.
-
-        - **predict** (*epoch: int, criterion: dict = None, loader:DataLoader = None, save: bool = False*) → y_true, y_hat, A_coo
-          - Parameters:
-            - **epoch** (*int*) - current epoch number.
-            - **criterion** (*dict*, *optional*) - same as in `.train()`.
-            - **loader** (*torch_geometric.data.DataLoader/DataListLoader*) - validation or test dataloader.
-            - **save** (*bool*, *optional*) - if True, save the model if the predicted loss turns out to be the current smallest.
-          - Returns:
-            - **y_pr** (*numpy.array*) - predicted probabilities of reconstructed graph signals.
-            - **y_gt** (*numpy.array*) - ground truth graph signals.
-            - **A_eidx** (*numpy.array*) - the associated graph adjacency in the form of edge index.
 ----
 
 For more details and extensive usage, please refer to the training scripts `./scripts/*.py`.
