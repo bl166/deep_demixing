@@ -61,28 +61,29 @@ Then in your browser, go to `localhost:PORT_NUM` (if local) or `REMOTE_IP_ADDR:P
 As you may have already found out, the entry point is in `./scripts/*.py`. You can modify configurations and hyperparameters (e.g. number of epochs, minibatch size, frequency of saving checkpoint models, learning rate, regularization coefficient, whether to use gpu and whether to do parallel training, ... etc.) in these files to train models in your favorite flavor.
 
 
-### 2) Have More Fun
+### 2) Experiments
+Data under directories `./datasets/exp_NUM/` are available for running the following experiments. We provide training scripts for experiments to reproduce our reported results. The scripts are given as `./scripts/exp_NUM-DESC.py`. Specifically, we have
+* `exp1-num_steps`: Train models with data on a 100-node graph and various number of time-steps in {5,10,15,20};
+* `exp8-less_data`: Train models using various amount of training samples: number of train samples in {0,4,8,16, 32, 50, 100,250, 500,1000,2000,4500};
+* `exp10-real_graph`: Train models using synthetic epidemics on a real temporal contact graph.
+
+Similar to the minimal example above, all these scripts can be run by
+```
+(torch)$ python ./script/exp_NUM-DESC.py
+```
+
+
+
+# 2. Have More Fun
+
 So far so good? Now it's time to dig into the code and see what exciting things you can try out with our framework!
 
 First of all, the data -- Our experiments rely on synthetic SIRS epidemics on (synthetic or real-world) graphs. This brief tutorial will start with a guidance for you to generate your own dataset. Next, we will show where and how our models are declared. We will also walk you through the `Trainer` class, a wrapper that we designed to manage the train, evaluate and tune models in a systematic manner. Finally, we will show some basic ways to visualize the results and compare performance.
 
 #### i. Data Generation
+In addition to our readily prepared datasets, we also include a script in this repo ([`./SIRS_outbreak_real.ipynb`](./SIRS_outbreak_real.ipynb)) to walk you through the process of generating epidemic data from scratch. Basically, it loads real contact graphs and spread synthetic epidemics on them, yet the "synthetic epidemics on synthetic graph" data generation follows exactly the same principles except that the graph itself will also be a synthetic RG graph.
+> For more details, please refer to our data script [`./SIRS_outbreak_real.ipynb`](./SIRS_outbreak_real.ipynb).
 
-> Please note: this section is under construction. Before we clear up and put together the code and docs of data generation, you can use the provided dataset at `./datasets/*`.
-
-The scripts `???.py` and `???.py` generate data for this project.
-
-##### a. Random Geometric (RG) Graphs
-TBD.
-
-##### b. Primary School Temporal Contact Graphs
-TBD.
-
-##### c. SIRS Epidemic Model
-TBD.
-
-##### d. Dataset and Data Loaders
-TBD.
 
 #### ii. Model and Trainer Declaration
 
@@ -121,7 +122,7 @@ All the candidate models are declared in `./models.py`. They inherit from the `t
         - **A_eidx** (*numpy.array*) - the associated graph adjacency in the form of edge index.
 ----
 
-For more details and extensive usage, please refer to the training scripts `./scripts/*.py`.
+> For more details and extensive usage, please refer to the training scripts [`./scripts/*.py`](./scripts/).
 
 #### iii. Analysis of Results
 We analyze and compare results yielded by candidate model both quantitatively and qualitatively. Quantitatively, we adopt the mean square error (MSE) to evaluate the node-level binary (infected / not infected) reconstruction performance. Additionally, we examine the top-k accuracy of sourcing the initial infected point performed by these models. Qualitatively, here we display the reconstructed graphs over time to show that our proposed model indeed does well finding the patient(s) "zero".
@@ -150,6 +151,9 @@ We analyze and compare results yielded by candidate model both quantitatively an
 
 ![graph](./figs/vis.png)
 **Figure 1**. DDmix is able to trace the cluster of initially infected nodes to its accurate source, whereas the non-graph-aware methods cannot. Unlike DDmix's reconstruction where one can clearly observe local and global spreading paths, their node probabilities just universally fade away as going back in time.
+
+> For more details, please refer to our visualization script [`./results_vis.ipynb`](./results_vis.ipynb).
+
 
 ## References
 - http://www.sociopatterns.org/datasets/primary-school-temporal-network-data/
