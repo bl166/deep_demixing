@@ -433,16 +433,11 @@ def calculate_metric(model, data_loader, **kwargs):
             y_hat_.append(y_hat.cpu().numpy().reshape((-1, max_nodes, T)))
             y_true_.append(y_true.cpu().numpy().reshape((-1, max_nodes, T)))
             A_coo_.append(A_coo.cpu().numpy())
-            
-            # mse
-            SE = (y_hat - torch.reshape(y_true, (-1, ))) ** 2
-            sum_SE = torch.sum(SE)
-            MSE = sum_SE / (max_nodes * T)
-            running_metric += float(MSE)
 
     y_hat_ = np.concatenate(y_hat_)
     y_true_ = np.concatenate(y_true_)
-    running_metric = np.round(running_metric / (i*data_loader.batch_size) , 4)
+    
+    running_metric = np.mean((y_hat_ - y_true_) ** 2)
     
     if not return_pred:
         return running_metric

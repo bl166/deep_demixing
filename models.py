@@ -39,7 +39,7 @@ class MLP_benchmark(nn.Module):
         
         return x
 
-
+    
 class CNN_time_benchmark(nn.Module):
 
     def __init__(self, T, max_nodes):
@@ -361,3 +361,5 @@ class CVAE_UNET_Batch(CVAE_UNET_Pr):
         y_hat = torch.sigmoid(y_hat)
         
         return y_hat, (mu, logstd, mu_pr, logstd_pr)
+    
+    

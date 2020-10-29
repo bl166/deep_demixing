@@ -7,7 +7,7 @@ from torch.nn import MSELoss, BCELoss
 import os
 
 # SET YOUR PROJECT ROOT DIR HERE
-PROJ_RT = "/Users/boningli/Desktop/Deep_demixing/" #"/root/Deep_demixing/"
+PROJ_RT = "/root/Deep_demixing/"
 import sys; sys.path.append(PROJ_RT)
 
 from utils import load_dataset, calculate_metric

@@ -6,10 +6,8 @@ import numpy as np
 from torch.nn import MSELoss, BCELoss
 import os
 
-
-# PROJ_RT = "/root/Deep_demixing/"
-PROJ_RT = "/Users/boningli/Desktop/Deep_demixing/"
-
+# SET YOUR PROJECT ROOT DIR HERE
+PROJ_RT = "/root/Deep_demixing/"
 import sys; sys.path.append(PROJ_RT)
 
 from utils import load_dataset, calculate_metric
@@ -18,11 +16,10 @@ from models import *#CVAE_UNET_Pr
 from utils import KLDLoss, NILReg, NILWithLogitsReg, parallalize_model
 
 
-
 # ------ CONFIGURATIONS -------
 
 epochs = 50           # total epochs to run
-save_freq = 1        # save model every x epochs
+save_freq = 5        # save model every x epochs
 batch_size = 4        # training mini-batch size
 l2 = 1e-6             # l2 normalization coefficient
 learning_rate = .01   # learning rate
@@ -81,7 +78,6 @@ for T in Ts:
     trainers = [GCVAE_Trainer] + [Benchmark_Trainer]*3
 
 
-
     for MODEL, TRAINER in zip(models, trainers):
         m_str = '_'.join(type(MODEL).__name__.split('_')[:-1])
 
@@ -103,7 +99,7 @@ for T in Ts:
         check_path = save_path+"model.pt"
 
         # construct the trainer
-        trainer = TRAINER(model, check_path, optimizer, resume=True, l2=l2, display_step=10)
+        trainer = TRAINER(model, check_path, optimizer, resume=True, l2=l2, display_step=100)
 
         # start training, and save the best model (lowest loss)
         try:
