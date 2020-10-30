@@ -1,6 +1,7 @@
 name: torch
 channels:
   - defaults
+  - conda-forge
 dependencies:
   - ca-certificates=2020.10.14
   - certifi=2020.6.20
@@ -64,13 +65,8 @@ dependencies:
     - tensorboard-plugin-wit==1.7.0
     - threadpoolctl==2.1.0
     - torch==1.6.0
-    - torch-cluster==1.5.7
-    - torch-geometric==1.6.1
-    - torch-scatter==2.0.5
-    - torch-sparse==0.6.7
-    - torch-spline-conv==1.2.0
     - tqdm==4.50.2
     - urllib3==1.25.11
     - werkzeug==1.0.1
     - zipp==3.3.2
-
+    
