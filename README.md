@@ -29,8 +29,8 @@ pip install torch-geometric
 
 Note: in commands above, please configure "cu102" and "torch-1.6.0" to make sure they match CUDA version {cpu, cu92, cu101, cu102} and torch version {1.4.0, 1.5.0, 1.6.0} on your machine. You find out the versions by
 ```
-$ python -c "import torch; print('cu'+''.join(torch.version.cuda.split('.')),end=' ; '); print('torch-'+torch.__version__);"
->>> cu102 ; torch-1.6.0
+(torch)$ python -c "import torch; print(''.join(torch.version.cuda.split('.')),end=' ; '); print('torch-'+torch.__version__);"
+>>> 102 ; torch-1.6.0
 ```
 
 ## 1. Getting Started
@@ -86,9 +86,7 @@ Similar to the minimal example above, all these scripts can be run by
 (torch)$ python ./script/exp_NUM-DESC.py
 ```
 
-
-
-# 2. Have More Fun
+## 2. Have More Fun
 
 So far so good? Now it's time to dig into the code and see what exciting things you can try out with our framework!
 
