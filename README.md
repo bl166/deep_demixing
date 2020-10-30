@@ -6,17 +6,31 @@ Official repository of the paper 'Deep Demixing: Reconstructing the evolution of
 
 - [anaconda](https://docs.anaconda.com/anaconda/install/) (ver=4.8.3)
 - python (3.7)
-- networkx (2.5)
 - [pytorch](https://pytorch.org/get-started/locally/) (1.6.0)
 - [pytorch_geometric ](https://pytorch-geometric.readthedocs.io/en/latest/notes/installation.html)(1.6.1)
 
-To make it less tedious for you, we provide a conda env file `./environment.yml`. With anaconda installed, direct to the project root dir and simply run the following lines in your terminal should set everything.
+To make it less tedious for you, we provide a conda env file `./environment.yml`. With anaconda installed, direct to the project root dir and simply run the following lines in your terminal should set everything except for torch-geometric.
 
 ```
-$ git clone https://github.com/gojkoc54/Deep_demixing.git
-$ cd Deep_demixing
-$ conda env create -f environment.yml
-$ source activate torch
+git clone https://github.com/gojkoc54/Deep_demixing.git
+cd Deep_demixing
+conda env create -f environment.yml
+source activate torch
+```
+
+Next, in this conda environment, install torch-geometric and its dependencies,
+```
+pip install torch-scatter==latest+cu102 -f https://pytorch-geometric.com/whl/torch-1.6.0.html
+pip install torch-sparse==latest+cu102 -f https://pytorch-geometric.com/whl/torch-1.6.0.html
+pip install torch-cluster==latest+cu102 -f https://pytorch-geometric.com/whl/torch-1.6.0.html
+pip install torch-spline-conv==latest+cu102 -f https://pytorch-geometric.com/whl/torch-1.6.0.html
+pip install torch-geometric
+```
+
+Note: in commands above, please configure "cu102" and "torch-1.6.0" to make sure they match CUDA version {cpu, cu92, cu101, cu102} and torch version {1.4.0, 1.5.0, 1.6.0} on your machine. You find out the versions by
+```
+$ python -c "import torch; print('cu'+''.join(torch.version.cuda.split('.')),end=' ; '); print('torch-'+torch.__version__);"
+>>> cu102 ; torch-1.6.0
 ```
 
 ## 1. Getting Started
