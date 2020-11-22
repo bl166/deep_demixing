@@ -1,5 +1,6 @@
 # Deep_demixing
-Official repository of the paper 'Deep Demixing: Reconstructing the evolution of epidemics using graph neural networks'
+Official repository of the paper 'Deep Demixing: Reconstructing the evolution of epidemics using graph neural networks' \
+https://arxiv.org/abs/2011.09583
 
 
 ## 0. Prerequisites
